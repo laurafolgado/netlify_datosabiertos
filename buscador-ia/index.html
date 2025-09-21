@@ -1792,13 +1792,15 @@ En mis búsquedas priorizo:</p>
 
       const data = await res.json();
       // Renderiza con formato (permite bloques ```)
-      out.innerHTML = marked.parse(data.text || "(Sin respuesta)");
+      const cleanText = data.text.replace(/\[\d+:\d+documentacion_completa\.pdf\]/g, "");
+      out.innerHTML = marked.parse(cleanText || "(Sin respuesta)");
     } catch (err) {
       out.textContent = "Se produjo un error de red o CORS. " + err;
     } finally {
       setLoading(false);
     }
   }
+
 
 </script>
 
