@@ -1729,7 +1729,7 @@ En mis búsquedas priorizo:</p>
 <!-- Spinner accesible -->
 <p><span id="spinner" class="spinner" hidden role="status" aria-live="polite" aria-label="Cargando">
   <span class="spinner__dot" aria-hidden="true"></span>
-  Pensando…
+  Pensando… (¡necesito mi tiempo!)
 </span></p>
 <p><label for="prompt" style="font-weight:600; display:block; margin:.5rem 0;">Respuesta:</label></p>
 <div id="respuesta"
@@ -1740,24 +1740,6 @@ En mis búsquedas priorizo:</p>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
-/*async function enviar() {
-  const prompt = document.getElementById("prompt").value;
-
-  const res = await fetch("/.netlify/functions/chat", { //EN PRODUCCION
-//const res = await fetch("https://datosabiertoscyl.netlify.app/.netlify/functions/chat", { //EN DESARROLLO
-  method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt })
-  });
-
-  if (!res.ok) {
-    document.getElementById("respuesta").innerHTML = "Error: " + res.status;
-    return;
-  }
-
-  const data = await res.json();
-  document.getElementById("respuesta").innerHTML = data.text;
-}*/
 
   const btn = document.getElementById("btnEnviar");
   const spinner = document.getElementById("spinner");
@@ -1790,16 +1772,16 @@ En mis búsquedas priorizo:</p>
         return;
       }
 
-      const data = await res.json();
-      // Renderiza con formato (permite bloques ```)
-      let cleanText = (data.text || "")
-      .replace(/\[\d+:\d+[^\]]*\]/g, "")         // corchetes normales [...]
-      .replace(/【\d+:\d+[^】]*】/g, "");          // corchetes “fullwidth” 【...】
+    const data = await res.json();
 
-      // (opcional) elimina dobles espacios que puedan quedar
-      cleanText = cleanText.replace(/\s{2,}/g, " ").trim();
+    // Elimina cualquier bloque dentro de corchetes normales o "fullwidth"
+    let cleanText = (data.text || "")
+      .replace(/\[[^\]]*\]/g, "")   // elimina [... cualquier cosa ...]
+      .replace(/【[^】]*】/g, "");   // elimina 【... cualquier cosa ...】
 
-      out.innerHTML = marked.parse(cleanText || "(Sin respuesta)");
+    cleanText = cleanText.replace(/\s{2,}/g, " ").trim();
+
+    out.innerHTML = marked.parse(cleanText || "(Sin respuesta)");
 
     } catch (err) {
       out.textContent = "Se produjo un error de red o CORS. " + err;
