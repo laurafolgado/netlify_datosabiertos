@@ -1631,7 +1631,15 @@ Su objetivo es mostrar, de forma clara y práctica, cómo trabajar con informaci
 <label for="prompt" style="font-weight: 600; display: block; margin-bottom: .5rem;">Escribe tu consulta:</label>
 <textarea id="prompt" rows="4" style="width: 90%; max-width: 500px; border-radius: 8px; border: 1px solid #ba273b; padding: .6rem;">¿Qué es un dataset en formato CSV?</textarea><br /><br />
 
-<button onclick="enviar()" style="background:#ba273b; color:white; border:none; padding:.6rem 1.2rem; border-radius:8px; font-size:1rem; cursor:pointer;">Enviar</button>
+<button id="btnEnviar" onclick="enviar()" style="background:#ba273b; color:white; border:none; padding:.6rem 1.2rem; border-radius:8px; font-size:1rem; cursor:pointer;">
+  Enviar
+</button>
+
+<!-- Spinner accesible -->
+<span id="spinner" class="spinner" hidden role="status" aria-live="polite" aria-label="Cargando">
+  <span class="spinner__dot" aria-hidden="true"></span>
+  Pensando…
+</span>
 
 <h3 style="margin-top:1rem;">Respuesta:</h3>
 <div id="respuesta" style="text-align:left; max-width:600px; white-space:pre-wrap; background:#fff; border:1px solid #ccc; padding:1rem; border-radius:8px;"></div>
@@ -1639,7 +1647,7 @@ Su objetivo es mostrar, de forma clara y práctica, cómo trabajar con informaci
 </div>
 
 <script>
-async function enviar() {
+/*async function enviar() {
   const prompt = document.getElementById("prompt").value;
 
   const res = await fetch("/.netlify/functions/chat", { //EN PRODUCCION
@@ -1656,7 +1664,50 @@ async function enviar() {
 
   const data = await res.json();
   document.getElementById("respuesta").innerHTML = data.text;
-}
+}*/
+
+<script>
+  const btn = document.getElementById("btnEnviar");
+  const spinner = document.getElementById("spinner");
+  const out = document.getElementById("respuesta");
+  const textarea = document.getElementById("prompt");
+
+  function setLoading(on) {
+    btn.disabled = on;
+    spinner.hidden = !on;
+  }
+
+  async function enviar() {
+    setLoading(true);
+    out.textContent = ""; // limpia la salida
+    try {
+      const prompt = textarea.value.trim();
+      if (!prompt) {
+        out.textContent = "Escribe una consulta primero.";
+        return;
+      }
+
+      const res = await fetch("/.netlify/functions/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+
+      if (!res.ok) {
+        out.textContent = "Error: " + res.status + " (" + res.statusText + ")";
+        return;
+      }
+
+      const data = await res.json();
+      // Renderiza con formato (permite bloques ```)
+      out.innerHTML = data.text || "(Sin respuesta)";
+    } catch (err) {
+      out.textContent = "Se produjo un error de red o CORS. " + err;
+    } finally {
+      setLoading(false);
+    }
+  }
+
 </script>
 
 <hr />
@@ -1685,6 +1736,34 @@ No se trata de ejemplos inventados, sino de <strong>datasets oficiales</strong> 
 <p>Soy <strong>profesora de Desarrollo Web en Entorno Cliente</strong> en un ciclo de Formación Profesional de Grado Superior.<br />
 He creado este recurso para acercar al alumnado a los <strong>retos reales del desarrollo web</strong>, utilizando datos abiertos como herramienta de aprendizaje.<br />
 Mi propósito es que cada estudiante aprenda no solo a programar, sino también a <strong>aprovechar la información pública</strong> para crear aplicaciones con impacto social.</p>
+<style>
+  .spinner {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-left: .75rem;
+    font-weight: 600;
+    color: #ba273b;
+  }
+  .spinner[hidden] { display: none; }
+  .spinner__dot {
+    width: 1rem; height: 1rem;
+    border-radius: 50%;
+    border: 2px solid color-mix(in srgb, #ba273b, transparent 70%);
+    border-top-color: #ba273b;
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* (Opcional) mejor lectura de código en la respuesta */
+  pre, code {
+    background: #f5f5f5; border-radius: 6px; padding: .6rem .8rem;
+    display: block; white-space: pre-wrap;
+    font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .9rem; line-height: 1.45;
+  }
+</style>
+
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css"></p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <script>
