@@ -1,0 +1,80 @@
+<footer class="custom-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Uso de Datos Abiertos de la Junta de Castilla y León en Formación Profesional
+      </h4>
+      <p> 2025 Laura Folgado Galache</p>
+      <p>Desarrollo web en entorno cliente - Desarrollo de Aplicaciones Web</p>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Licencia</h4>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">
+        <img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Licencia Creative Commons" class="license-logo">
+      </a>
+      <p>Esta obra está bajo una <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+.custom-footer {
+  background-color: #f5f5f5;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-section h4 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.1em;
+}
+
+.footer-section p {
+  margin: 0.5rem 0;
+  color: #666;
+  line-height: 1.5;
+}
+
+.license-logo {
+  margin: 0.5rem 0;
+  height: 31px;
+}
+
+.footer-section a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #42b983;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .footer-section {
+    text-align: center;
+  }
+}
+</style>

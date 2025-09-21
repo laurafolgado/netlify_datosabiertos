@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo fetch – TXT y JSON (Datos Abiertos JCyL)</title>
+  <style>
+    body { font-family: sans-serif; margin: 1.5rem; }
+    h1 { color: #8f1f2d; }
+    section { margin-bottom: 2rem; }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      border-radius: 8px;
+      max-height: 200px;
+      overflow: auto;
+    }
+    ul { padding-left: 1.2rem; }
+  </style>
+</head>
+<body>
+  <h1>Demo: fetch con TXT y JSON</h1>
+  <p>Ejemplo real con datos abiertos de la Junta de Castilla y León.</p>
+
+  <section>
+    <h2>📄 Fotogramas aéreos (TXT)</h2>
+    <p>Primeras líneas del archivo <code>Leeme.txt</code>:</p>
+    <pre id="txt"></pre>
+  </section>
+
+  <section>
+    <h2>🥇 Marcas de calidad (JSON)</h2>
+    <p>Primeras 5 marcas:</p>
+    <ul id="marcas"></ul>
+  </section>
+
+  <script>
+    // --- Cargar TXT ---
+    async function cargarTXT() {
+      try {
+        const res = await fetch("Leeme.txt");
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const texto = await res.text();
+        document.getElementById("txt").textContent = texto.split("\n").slice(0, 15).join("\n");
+      } catch (err) {
+        document.getElementById("txt").textContent = "❌ Error al cargar el TXT.";
+        console.error(err);
+      }
+    }
+
+    // --- Cargar JSON ---
+    async function cargarJSON() {
+      try {
+        const res = await fetch("garant.json");
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const datos = await res.json();
+        const lista = document.getElementById("marcas");
+        datos.slice(0, 5).forEach(marca => {
+          const li = document.createElement("li");
+          li.textContent = `${marca.Nombre} (${marca.URL})`;
+          lista.appendChild(li);
+        });
+      } catch (err) {
+        document.getElementById("marcas").textContent = "❌ Error al cargar el JSON.";
+        console.error(err);
+      }
+    }
+
+    // --- Ejecutar ambas cargas ---
+    cargarTXT();
+    cargarJSON();
+  </script>
+</body>
+</html>

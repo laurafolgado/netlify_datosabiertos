@@ -1,0 +1,123 @@
+/* Junta de Castilla y León · identidad unificada */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&family=Source+Code+Pro:wght@400;600&display=swap");
+
+/* Paleta base */
+:root {
+  --brand-primary: #ba273b;          /* granate JCyL */
+  --brand-primary-700: #8f1f2d;      /* granate oscuro */
+  --brand-primary-050: #f8e9ec;      /* fondo suave */
+  --brand-gold: #c7a600;             /* opcional (corona) */
+
+  /* Overrides de Material */
+  --md-primary-fg-color: var(--brand-primary);
+  --md-primary-fg-color--light: color-mix(in srgb, var(--brand-primary), white 20%);
+  --md-primary-fg-color--dark: var(--brand-primary-700);
+  --md-primary-bg-color: #ffffff;
+  --md-accent-fg-color: var(--brand-primary);
+
+  /* Texto y superficies */
+  --md-default-bg-color: #ffffff;
+  --md-default-fg-color: #222;
+  --md-default-fg-color--light: #555;
+  --md-default-fg-color--lighter: #888;
+
+  /* Código */
+  --md-code-bg-color: #f6f6f8;
+  --md-code-fg-color: #1e1e1e;
+
+  /* Links */
+  --link-color: var(--brand-primary);
+  --link-hover: var(--brand-primary-700);
+
+  /* Contenedor */
+  --content-max: 1200px;
+}
+
+/* Modo oscuro */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #151518;
+  --md-default-fg-color: #e8e8ea;
+  --md-default-fg-color--light: #cfcfd4;
+  --md-default-fg-color--lighter: #a6a6ad;
+  --md-code-bg-color: #1f1f24;
+  --md-code-fg-color: #e8e8ea;
+  --link-color: color-mix(in srgb, var(--brand-primary), white 15%);
+  --link-hover: var(--brand-primary);
+}
+
+/* Tipografías globales */
+body, .md-typeset {
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+.md-typeset h1, .md-typeset h2, .md-typeset h3,
+.md-typeset h4, .md-typeset h5 {
+  font-family: "Montserrat", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing: .1px;
+}
+
+/* Encabezados */
+.md-typeset h1 {
+  color: var(--brand-primary);
+  border-bottom: 2px solid color-mix(in srgb, var(--brand-primary), transparent 75%);
+  padding-bottom: .35rem;
+  margin: 1.2rem 0 .8rem;
+}
+.md-typeset h2 {
+  color: var(--brand-primary-700);
+  border-bottom: 1px solid color-mix(in srgb, var(--brand-primary), transparent 82%);
+  padding-bottom: .3rem;
+  margin-top: 1.3rem;
+}
+.md-typeset h3 { color: var(--brand-primary); }
+
+/* Header y navegación */
+.md-header { background: var(--brand-primary); }
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg { height: 2.1rem; width: auto; }
+
+.md-nav--primary .md-nav__title { color: #fff; background: var(--brand-primary); }
+.md-nav__link--active { color: var(--brand-primary) !important; font-weight: 600; }
+
+/* Links */
+.md-typeset a { color: var(--link-color); }
+.md-typeset a:hover { color: var(--link-hover); }
+
+/* Admoniciones con acento de marca */
+.md-typeset .admonition,
+.md-typeset details { border-left: .28rem solid var(--brand-primary); }
+.md-typeset .admonition > .admonition-title {
+  background: var(--brand-primary-050);
+  color: var(--brand-primary-700);
+}
+
+/* Código y bloques */
+.md-typeset code {
+  font-family: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+.md-typeset pre > code {
+  background: var(--md-code-bg-color);
+  color: var(--md-code-fg-color);
+  border: 1px solid color-mix(in srgb, var(--brand-primary), transparent 85%);
+  border-left: 4px solid var(--brand-primary);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+/* Tablas full-width legibles */
+.md-typeset table:not([class]) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid color-mix(in srgb, var(--brand-primary), transparent 88%);
+  border-radius: 8px;
+}
+.md-typeset table:not([class]) th {
+  background: var(--brand-primary-050);
+  color: var(--brand-primary-700);
+}
+
+/* Contenedor ancho cómodo */
+.md-content { max-width: var(--content-max) !important; margin: 0 auto; }

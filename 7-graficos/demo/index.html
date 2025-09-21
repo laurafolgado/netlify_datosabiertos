@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Demo Vanilla – Gráfico (Canvas) · Redes sociales</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, sans-serif; margin: 1.5rem; }
+    h1 { color: #ba273b; font-size: 1.35rem; margin: 0 0 .75rem; }
+    canvas { border: 1px solid #d0d0d0; border-radius: .5rem; background: canvas; display: block; }
+    .hint { opacity: .85; font-size: .95rem; margin: .5rem 0 1rem; }
+    footer { margin-top: .75rem; opacity: .8; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <h1>Gráfico de barras (Vanilla · Canvas) — Uso de redes sociales</h1>
+  <p class="hint" id="detalles"></p>
+  <canvas id="grafico" width="760" height="420" aria-label="Gráfico uso de redes sociales" role="img"></canvas>
+  <footer>Fuente: Datos Abiertos de la Junta de Castilla y León · “Estadísticas de uso de redes sociales” (CSV).</footer>
+
+<script type="module">
+  // Utilidades
+  const toNum = (v) => {
+    if (v == null) return NaN;
+    const s = String(v).trim().replace(',', '.').replace(/\s+/g, '');
+    // si trae %, lo quitamos
+    return Number(s.replace('%', ''));
+  };
+  const norm = (h) => String(h ?? '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g,' ').trim().toLowerCase();
+
+  // Parse CSV tolerante (coma o ; y comillas)
+  async function loadCSV(url) {
+    const res = await fetch(url, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = (await res.text()).replace(/\r\n?/g, '\n');
+    const first5 = text.split('\n').slice(0,5).join('\n');
+    const delimiter = ((first5.match(/;/g)||[]).length > (first5.match(/,/g)||[]).length) ? ';' : ',';
+
+    const lines = text.split('\n').filter(l => l.length);
+    const rows = [];
+    for (const line of lines) {
+      const cells = [];
+      let cur = '', inQ = false;
+      for (let i=0;i<line.length;i++){
+        const ch=line[i];
+        if (inQ){
+          if (ch === '"' && line[i+1] === '"'){ cur+='"'; i++; }
+          else if (ch === '"'){ inQ = false; }
+          else cur += ch;
+        } else {
+          if (ch === '"') inQ = true;
+          else if (ch === delimiter){ cells.push(cur); cur=''; }
+          else cur += ch;
+        }
+      }
+      cells.push(cur);
+      rows.push(cells);
+    }
+    const headers = rows.shift().map(h => h.trim());
+    const data = rows.map(r => Object.fromEntries(headers.map((h,i)=>[h, r[i] ?? ''])));
+    return { headers, data, delimiter };
+  }
+
+  // Heurísticas: localizar columnas clave
+  function detectColumns(headers, data) {
+    const normMap = new Map(headers.map(h => [h, norm(h)]));
+
+    // Candidato a "año"
+    const yearHeader = headers.find(h => /(^|\b)(año|anio|ano|year)(\b|$)/i.test(h)) ??
+      headers.find(h => {
+        // si la mayoría de valores son YYYY
+        const vals = data.slice(0, Math.min(50, data.length)).map(d => String(d[h]).trim());
+        const hits = vals.filter(v => /^\d{4}$/.test(v)).length;
+        return hits >= Math.max(3, Math.ceil(vals.length * 0.6));
+      });
+
+    // Candidato a "valor"
+    const valueHeaderByName = headers.find(h => /(porcentaje|%|valor|tasa|proporcion)/i.test(normMap.get(h)));
+    // por tipo (numérico en la mayoría de filas)
+    const valueHeaderByType = headers
+      .map(h => {
+        const vals = data.slice(0, Math.min(60, data.length)).map(d => toNum(d[h]));
+        const numericRatio = vals.filter(Number.isFinite).length / Math.max(1, vals.length);
+        return { h, numericRatio };
+      })
+      .sort((a,b)=> b.numericRatio - a.numericRatio)[0]?.h;
+
+    const valueHeader = valueHeaderByName || valueHeaderByType;
+
+    // Candidato a "categoría" (no numérica y no-año)
+    const nonNumericHeaders = headers.filter(h => h !== valueHeader).filter(h => {
+      const vals = data.slice(0, Math.min(60, data.length)).map(d => toNum(d[h]));
+      const numericRatio = vals.filter(Number.isFinite).length / Math.max(1, vals.length);
+      return numericRatio < 0.3;
+    });
+    // preferimos nombres tipo Red, Plataforma, Nombre
+    const catHeader =
+      nonNumericHeaders.find(h => /(red|plataforma|nombre|categoria|concepto|variable)/i.test(normMap.get(h))) ||
+      nonNumericHeaders[0];
+
+    return { yearHeader, valueHeader, catHeader };
+  }
+
+  // Preparar datos para un año (si lo hay) o sin año
+  function prepareSeries(data, { yearHeader, valueHeader, catHeader }) {
+    if (!valueHeader || !catHeader) return { labels: [], values: [], meta: {} };
+
+    let filtered = data;
+    let chosenYear = null;
+
+    if (yearHeader) {
+      const years = Array.from(new Set(
+        data.map(d => d[yearHeader]).map(v => Number(String(v).match(/\d{4}/)?.[0])).filter(Number.isFinite)
+      )).sort((a,b)=>a-b);
+      if (years.length) {
+        chosenYear = years[years.length - 1]; // último año disponible
+        filtered = data.filter(d => {
+          const y = Number(String(d[yearHeader]).match(/\d{4}/)?.[0]);
+          return y === chosenYear;
+        });
+      }
+    }
+
+    const labels = [];
+    const values = [];
+    filtered.forEach(row => {
+      const label = String(row[catHeader]).trim();
+      const val = toNum(row[valueHeader]);
+      if (label && Number.isFinite(val)) {
+        labels.push(label);
+        values.push(val);
+      }
+    });
+
+    return { labels, values, meta: { chosenYear, yearHeader, valueHeader, catHeader } };
+  }
+
+  function drawBarChart(ctx, labels, values, titleY = "Porcentaje de uso (%)") {
+    const W = ctx.canvas.width, H = ctx.canvas.height;
+    ctx.clearRect(0,0,W,H);
+    const M = 64;
+    const maxV = Math.max(1, ...values);
+    const n = Math.max(1, labels.length);
+    const bw = (W - 2*M) / n;
+    // ejes
+    ctx.strokeStyle = "#8a8a8a"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(M, M/2); ctx.lineTo(M, H-M); ctx.lineTo(W-M, H-M); ctx.stroke();
+    // barras
+    ctx.font = "12px system-ui, sans-serif"; ctx.textAlign = "center";
+    values.forEach((v,i)=>{
+      const h = (v / maxV) * (H - 1.6*M);
+      const x = M + i*bw; const y = (H-M) - h;
+      ctx.fillStyle = "#ba273b";
+      ctx.fillRect(x + bw*0.2, y, bw*0.6, h);
+      ctx.fillStyle = "#111"; ctx.fillText(v + "%", x + bw*0.5, y - 6);
+      ctx.save(); ctx.translate(x + bw*0.5, H - M + 14); ctx.rotate(-0.35);
+      ctx.fillText(labels[i], 0, 0); ctx.restore();
+    });
+    // título eje Y
+    ctx.save(); ctx.translate(22, H/2); ctx.rotate(-Math.PI/2);
+    ctx.font = "14px system-ui, sans-serif"; ctx.fillStyle = "#222"; ctx.fillText(titleY, 0, 0);
+    ctx.restore();
+  }
+
+  (async () => {
+    try {
+      const { headers, data, delimiter } = await loadCSV("./estadisticas-de-uso-de-redes-sociales.csv");
+      console.log("Cabeceras:", headers, "Delimitador:", delimiter);
+
+      const cols = detectColumns(headers, data);
+      console.log("Detección columnas:", cols);
+
+      const { labels, values, meta } = prepareSeries(data, cols);
+      console.log("Año elegido:", meta.chosenYear, "Filas:", labels.length);
+
+      const detalles = document.getElementById('detalles');
+      detalles.textContent = meta.yearHeader
+        ? `Usando columnas: Categoría = “${meta.catHeader}”, Valor = “${meta.valueHeader}”, Año = “${meta.yearHeader}”. Año mostrado: ${meta.chosenYear ?? '—'}`
+        : `Usando columnas: Categoría = “${meta.catHeader}”, Valor = “${meta.valueHeader}”. (El dataset no tiene columna de año detectable)`;
+
+      const ctx = document.getElementById("grafico").getContext("2d");
+      if (!labels.length) {
+        detalles.textContent += " · No se encontraron filas válidas (revisa separador, cabeceras y que el porcentaje sea numérico).";
+        return;
+        }
+      drawBarChart(ctx, labels, values);
+    } catch (e) {
+      console.error(e);
+      document.getElementById('detalles').textContent = "Error cargando o interpretando el CSV. Revisa la consola.";
+    }
+  })();
+</script>
+</body>
+</html>

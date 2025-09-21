@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1" />
+  <title>Demo – Hostelería a domicilio (CSV)</title>
+
+  <!-- Tabulator (tabla interactiva) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/tabulator-tables@6.2.5/dist/css/tabulator.min.css" />
+
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      margin: 0; padding: 1rem 1.25rem; line-height: 1.4;
+    }
+    header { margin-bottom: 1rem; }
+    h1 { margin: 0 0 .25rem 0; font-size: 1.25rem; }
+    .toolbar { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; margin: .75rem 0 1rem; }
+    .toolbar input[type="search"] {
+      flex: 1 1 260px; padding: .5rem .625rem; border-radius: .5rem; border: 1px solid #ccc;
+    }
+    .toolbar select { padding: .45rem .5rem; border-radius: .5rem; border: 1px solid #ccc; }
+    .status { font-size: .95rem; margin-top: .5rem; }
+    .counter { font-weight: 600; }
+    .table-wrap { border-radius: .75rem; overflow: hidden; border: 1px solid #ddd; }
+    footer { margin-top: 1rem; font-size: .9rem; opacity: .8; }
+    .hint { font-size: .9rem; opacity: .9; }
+    @media (max-width: 640px) {
+      .toolbar { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Demo en vivo · Hostelería a domicilio (CSV · JCyL)</h1>
+    <p class="hint">Demostración: parseo con <strong>Papa Parse</strong> y tabla con <strong>Tabulator</strong>. Requiere abrir con un servidor local.</p>
+  </header>
+
+  <section class="toolbar" aria-label="Controles de filtrado y vista">
+    <input id="q" type="search" placeholder="Buscar en cualquier columna…" aria-label="Buscar" />
+    <label>
+      Tamaño de página:
+      <select id="pageSize" aria-label="Tamaño de página">
+        <option value="10" selected>10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+      </select>
+    </label>
+    <span id="counter" class="counter" aria-live="polite">Cargando…</span>
+  </section>
+
+  <div class="table-wrap">
+    <div id="tabla"></div>
+  </div>
+
+  <p id="status" class="status" aria-live="polite"></p>
+
+  <footer>
+    Fuente: Datos Abiertos de la Junta de Castilla y León · Dataset “Hostelería a domicilio” (CSV).
+  </footer>
+
+  <!-- Librerías -->
+  <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://unpkg.com/tabulator-tables@6.2.5/dist/js/tabulator.min.js"></script>
+
+  <!-- Lógica de la demo -->
+  <script type="module">
+    const CSV_URL = "../../datasets/csv/hosteleria-a-domicilio.csv";
+    const tablaEl = document.getElementById("tabla");
+    const q = document.getElementById("q");
+    const status = document.getElementById("status");
+    const counter = document.getElementById("counter");
+    const pageSizeSel = document.getElementById("pageSize");
+
+    function setStatus(msg) { status.textContent = msg; }
+    function setCounter(n) { counter.textContent = Number.isFinite(n) ? `${n} resultados` : String(n); }
+
+    // Carga + parseo CSV
+    async function loadData() {
+      try {
+        setStatus("Descargando CSV…");
+        const res = await fetch(CSV_URL, { cache: "no-cache" });
+        if (!res.ok) throw new Error(`HTTP ${res.status} al obtener el CSV`);
+        const text = await res.text();
+
+        setStatus("Parseando CSV…");
+        const parsed = Papa.parse(text, {
+          header: true,
+          skipEmptyLines: true,
+          dynamicTyping: false, // lo dejamos en texto; puedes tipar después si quieres
+        });
+
+        if (parsed.errors?.length) {
+          console.warn("Errores de parseo:", parsed.errors.slice(0, 5));
+        }
+
+        const data = parsed.data;
+        initTable(data);
+      } catch (err) {
+        console.error(err);
+        setStatus("❌ Error al cargar o parsear el CSV. Revisa la ruta y usa un servidor local.");
+        setCounter("—");
+      }
+    }
+
+    let table;
+    function initTable(rows) {
+      const columns = Object.keys(rows[0] ?? {}).map((k) => ({
+        title: k,
+        field: k,
+        headerFilter: false, // usaremos búsqueda global
+        sorter: "string",
+      }));
+
+      table = new Tabulator(tablaEl, {
+        data: rows,
+        columns,
+        layout: "fitDataStretch",
+        pagination: true,
+        paginationSize: Number(pageSizeSel.value),
+        paginationSizeSelector: [10, 25, 50, 100],
+        placeholder: "No hay datos que mostrar",
+        progressiveRender: true,
+        progressiveRenderSize: 200,
+        columnDefaults: { headerHozAlign: "left", hozAlign: "left" },
+        index: columns[0]?.field || undefined,
+        rowFormatter: function(row){ /* sitio para resaltar condicionalmente si quieres */ }
+      });
+
+      setCounter(rows.length);
+      setStatus("✅ Listo");
+
+      // Búsqueda global
+      q.addEventListener("input", () => {
+        const term = q.value.trim().toLowerCase();
+        if (!term) {
+          table.clearFilter(true);
+          setCounter(table.getDataCount());
+          return;
+        }
+        // Filtra por cualquiera de las columnas (contiene término)
+        table.setFilter((row) => {
+          const obj = row.getData();
+          for (const v of Object.values(obj)) {
+            if (String(v ?? "").toLowerCase().includes(term)) return true;
+          }
+          return false;
+        });
+        setCounter(table.getDataCount());
+      });
+
+      // Cambio de tamaño de página
+      pageSizeSel.addEventListener("change", () => {
+        table.setPageSize(Number(pageSizeSel.value));
+      });
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

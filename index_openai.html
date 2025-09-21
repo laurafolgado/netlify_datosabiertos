@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prueba OpenAI + Netlify</title>
+</head>
+<body>
+  <h1>Prueba con OpenAI en Netlify</h1>
+
+  <label for="prompt">Escribe tu prompt:</label><br />
+  <textarea id="prompt" rows="4" cols="50">Escribe un haiku sobre la inteligencia artificial</textarea><br /><br />
+
+  <button onclick="enviar()">Enviar</button>
+
+  <h2>Respuesta:</h2>
+  <pre id="respuesta"></pre>
+
+  <script>
+    async function enviar() {
+      const prompt = document.getElementById("prompt").value;
+
+      const res = await fetch("/.netlify/functions/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+
+      if (!res.ok) {
+        document.getElementById("respuesta").innerText = "Error: " + res.status;
+        return;
+      }
+
+      const data = await res.json();
+      document.getElementById("respuesta").innerText = data.text;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+/* Estilos para el logo en el header */
+.md-header__button.md-logo {
+  padding: 0.2rem 0.4rem; /* Ajusta el padding alrededor del logo */
+}
+
+.md-header__button.md-logo img, .md-header__button.md-logo svg {
+  height: 2.2rem; /* Altura del logo */
+  width: auto; /* Mantiene la proporción de aspecto */
+  max-width: 200px; /* Ancho máximo para evitar que sea demasiado ancho */
+}
+
+/* Personaliza bloques de código bash */
+.md-typeset pre code.language-bash {
+    background-color: #1e1e1e; /* Fondo gris oscuro, menos intenso que el negro puro */
+    color: #d4d4d4;           /* Texto gris claro */
+    border-left: 4px solid #1984c2; /* Barra azul en el lateral izquierdo */
+    border-radius: 4px;       /* Bordes redondeados */
+    padding: 12px;            /* Espaciado interno */
+    font-family: 'Source Code Pro', monospace; /* Fuente monoespaciada limpia */
+    font-size: 0.9rem;        /* Tamaño de fuente ligeramente reducido */
+    line-height: 1.5;         /* Espaciado entre líneas para mejor legibilidad */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  }
+  
+  
+/* Personalizamos el footer */
+.custom-footer {
+  background-color: #282c34; /* Fondo oscuro */
+  color: #ffffff; /* Texto blanco */
+  text-align: left;
+  padding: 1rem 0;
+  font-size: 0.7rem;
+}
+
+.custom-footer p {
+  margin: 0.5rem 0;
+}
+
+.custom-footer a {
+  color: #61dafb; /* Azul claro */
+  text-decoration: none;
+}
+
+.custom-footer a:hover {
+  text-decoration: underline;
+}
