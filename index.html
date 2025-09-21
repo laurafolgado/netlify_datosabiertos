@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#portada-del-proyecto-datos-abiertos-y-desarrollo-web" class="md-skip">
+        <a href="#presentacion-del-proyecto" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Portada del proyecto · Datos Abiertos y Desarrollo Web
+              Presentación del proyecto
             
           </span>
         </div>
@@ -1561,9 +1561,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#buscador-con-inteligencia-artificial" class="md-nav__link">
+  <a href="#lauraia-tu-busqueda-con-inteligencia-artificial" class="md-nav__link">
     <span class="md-ellipsis">
-      🔎 Buscador con inteligencia artificial
+      🔎 LauraIA: tu búsqueda con inteligencia artificial:
     </span>
   </a>
   
@@ -1621,15 +1621,19 @@
 
 
 
-<h1 id="portada-del-proyecto-datos-abiertos-y-desarrollo-web">Portada del proyecto · Datos Abiertos y Desarrollo Web</h1>
-<p>Bienvenido a este recurso educativo sobre <strong>Datos Abiertos de la Junta de Castilla y León</strong> aplicados al desarrollo web.<br />
-Su objetivo es mostrar, de forma clara y práctica, cómo trabajar con información pública real para crear aplicaciones útiles y actuales.</p>
+<h1 id="presentacion-del-proyecto">Presentación del proyecto</h1>
+<p>Te doy la bienvenida a este recurso sobre el <strong>uso de Datos Abiertos de la Junta de Castilla y León</strong> aplicados al desarrollo web.<br />
+Su objetivo es mostrar, de forma clara y práctica, cómo trabajar con información pública real para crear aplicaciones útiles y actuales haciendo uso de datos abiertos.</p>
 <hr />
-<h2 id="buscador-con-inteligencia-artificial">🔎 Buscador con inteligencia artificial</h2>
+<h2 id="lauraia-tu-busqueda-con-inteligencia-artificial">🔎 LauraIA: tu búsqueda con inteligencia artificial:</h2>
+<p>Explora de forma interactiva el mundo de los <strong>Datos Abiertos de Castilla y León</strong>.<br />
+Escribe tu consulta en lenguaje natural y nuestra IA te responderá con ejemplos, explicaciones y referencias prácticas para que entiendas mejor cómo aprovechar esta información pública en tus proyectos web.</p>
 <div align="center" style="padding: 1.5rem; border: 2px solid #ba273b; border-radius: 12px; background: #f8e9ec;">
 
 <label for="prompt" style="font-weight: 600; display: block; margin-bottom: .5rem;">Escribe tu consulta:</label>
-<textarea id="prompt" rows="4" style="width: 90%; max-width: 500px; border-radius: 8px; border: 1px solid #ba273b; padding: .6rem;">¿Qué es un dataset en formato CSV?</textarea><br /><br />
+<textarea id="prompt" rows="4"
+  style="width: 100%; max-width: 600px; border-radius: 8px; border: 1px solid #ba273b; padding: .6rem;">
+</textarea>
 
 <button id="btnEnviar" onclick="enviar()" style="background:#ba273b; color:white; border:none; padding:.6rem 1.2rem; border-radius:8px; font-size:1rem; cursor:pointer;">
   Enviar
@@ -1642,7 +1646,9 @@ Su objetivo es mostrar, de forma clara y práctica, cómo trabajar con informaci
 </span>
 
 <h3 style="margin-top:1rem;">Respuesta:</h3>
-<div id="respuesta" style="text-align:left; max-width:600px; white-space:pre-wrap; background:#fff; border:1px solid #ccc; padding:1rem; border-radius:8px;"></div>
+<div id="respuesta"
+  style="text-align:left; width:100%; max-width:600px; white-space:pre-wrap; background:#fff; border:1px solid #ccc; padding:1rem; border-radius:8px;">
+</div>
 
 </div>
 
@@ -1666,7 +1672,6 @@ Su objetivo es mostrar, de forma clara y práctica, cómo trabajar con informaci
   document.getElementById("respuesta").innerHTML = data.text;
 }*/
 
-<script>
   const btn = document.getElementById("btnEnviar");
   const spinner = document.getElementById("spinner");
   const out = document.getElementById("respuesta");
@@ -1712,13 +1717,13 @@ Su objetivo es mostrar, de forma clara y práctica, cómo trabajar con informaci
 
 <hr />
 <h2 id="objetivo-del-proyecto">🎯 Objetivo del proyecto</h2>
-<p>Acercar al alumnado y a cualquier persona interesada al <strong>uso real de los datos abiertos</strong>.<br />
+<p>Acercar al alumnado de desarrollo de aplicaciones web de Formación Profesional y Universidad, y a cualquier persona interesada, al <strong>uso real de los datos abiertos</strong>.<br />
 No se trata de ejemplos inventados, sino de <strong>datasets oficiales</strong> que obligan a enfrentarse a formatos, estructuras y problemas auténticos, como sucede en el mundo profesional.  </p>
 <hr />
 <h2 id="destinatarios">👥 Destinatarios</h2>
 <ul>
-<li><strong>Estudiantes de Formación Profesional</strong> del ámbito de la informática y el desarrollo web.  </li>
-<li><strong>Desarrolladores</strong> que quieran aprender a consumir y visualizar datos abiertos con JavaScript y librerías habituales.  </li>
+<li><strong>Estudiantes de Formación Profesional</strong> y <strong>Universidad</strong> del ámbito de la informática y el desarrollo web.  </li>
+<li><strong>Desarrolladoras y desarrolladores</strong> que quieran aprender a consumir y visualizar datos abiertos con JavaScript y librerías habituales.  </li>
 <li><strong>Personas curiosas</strong> interesadas en la transparencia, la innovación y la reutilización de información pública.</li>
 </ul>
 <hr />
@@ -1733,8 +1738,8 @@ No se trata de ejemplos inventados, sino de <strong>datasets oficiales</strong> 
 <p>El sitio cuenta además con recursos de apoyo, demos visuales y apartados explicativos sobre la importancia de la transparencia y la participación ciudadana.</p>
 <hr />
 <h2 id="quien-esta-detras-del-proyecto">👩‍🏫 Quién está detrás del proyecto</h2>
-<p>Soy <strong>profesora de Desarrollo Web en Entorno Cliente</strong> en un ciclo de Formación Profesional de Grado Superior.<br />
-He creado este recurso para acercar al alumnado a los <strong>retos reales del desarrollo web</strong>, utilizando datos abiertos como herramienta de aprendizaje.<br />
+<p>Laura Folgado Galache, <strong>profesora de Desarrollo Web en Entorno Cliente</strong> en el ciclo de grado superior de Desarrollo de aplicaciones web.
+He creado este recurso para acercar al alumnado de Formación Profesional y Universidad, a los <strong>retos reales del desarrollo web</strong>, utilizando datos abiertos como herramienta de aprendizaje.<br />
 Mi propósito es que cada estudiante aprenda no solo a programar, sino también a <strong>aprovechar la información pública</strong> para crear aplicaciones con impacto social.</p>
 <style>
   .spinner {
