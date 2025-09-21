@@ -1792,8 +1792,15 @@ En mis búsquedas priorizo:</p>
 
       const data = await res.json();
       // Renderiza con formato (permite bloques ```)
-      const cleanText = data.text.replace(/\[\d+:\d+documentacion_completa\.pdf\]/g, "");
+      let cleanText = (data.text || "")
+      .replace(/\[\d+:\d+[^\]]*\]/g, "")         // corchetes normales [...]
+      .replace(/【\d+:\d+[^】]*】/g, "");          // corchetes “fullwidth” 【...】
+
+      // (opcional) elimina dobles espacios que puedan quedar
+      cleanText = cleanText.replace(/\s{2,}/g, " ").trim();
+
       out.innerHTML = marked.parse(cleanText || "(Sin respuesta)");
+
     } catch (err) {
       out.textContent = "Se produjo un error de red o CORS. " + err;
     } finally {
