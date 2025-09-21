@@ -1790,13 +1790,14 @@ En mis búsquedas priorizo:</p>
 
       const data = await res.json();
       // Renderiza con formato (permite bloques ```)
-      out.innerHTML = data.text || "(Sin respuesta)";
+      out.innerHTML = marked.parse(data.text || "(Sin respuesta)";
     } catch (err) {
       out.textContent = "Se produjo un error de red o CORS. " + err;
     } finally {
       setLoading(false);
     }
   }
+
 
 </script>
 
@@ -1833,6 +1834,7 @@ En mis búsquedas priorizo:</p>
 <script>
   hljs.highlightAll();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 
 
