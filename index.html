@@ -1634,7 +1634,7 @@ Su objetivo es mostrar, de forma clara y práctica, cómo trabajar con informaci
 <button onclick="enviar()" style="background:#ba273b; color:white; border:none; padding:.6rem 1.2rem; border-radius:8px; font-size:1rem; cursor:pointer;">Enviar</button>
 
 <h3 style="margin-top:1rem;">Respuesta:</h3>
-<pre id="respuesta" style="text-align:left; max-width:600px; white-space:pre-wrap; background:#fff; border:1px solid #ccc; padding:1rem; border-radius:8px;"></pre>
+<div id="respuesta" style="text-align:left; max-width:600px; white-space:pre-wrap; background:#fff; border:1px solid #ccc; padding:1rem; border-radius:8px;"></div>
 
 </div>
 
@@ -1642,19 +1642,20 @@ Su objetivo es mostrar, de forma clara y práctica, cómo trabajar con informaci
 async function enviar() {
   const prompt = document.getElementById("prompt").value;
 
-  const res = await fetch("/.netlify/functions/chat", {
-    method: "POST",
+  const res = await fetch("/.netlify/functions/chat", { //EN PRODUCCION
+//const res = await fetch("https://datosabiertoscyl.netlify.app/.netlify/functions/chat", { //EN DESARROLLO
+  method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ prompt })
   });
 
   if (!res.ok) {
-    document.getElementById("respuesta").innerText = "Error: " + res.status;
+    document.getElementById("respuesta").innerHTML = "Error: " + res.status;
     return;
   }
 
   const data = await res.json();
-  document.getElementById("respuesta").innerText = data.text;
+  document.getElementById("respuesta").innerHTML = data.text;
 }
 </script>
 
@@ -1684,6 +1685,11 @@ No se trata de ejemplos inventados, sino de <strong>datasets oficiales</strong> 
 <p>Soy <strong>profesora de Desarrollo Web en Entorno Cliente</strong> en un ciclo de Formación Profesional de Grado Superior.<br />
 He creado este recurso para acercar al alumnado a los <strong>retos reales del desarrollo web</strong>, utilizando datos abiertos como herramienta de aprendizaje.<br />
 Mi propósito es que cada estudiante aprenda no solo a programar, sino también a <strong>aprovechar la información pública</strong> para crear aplicaciones con impacto social.</p>
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css"></p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
 
 
 
