@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eventos desde XML · Fast-XML-Parser + Tabulator</title>
+  <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@6.2.5/dist/css/tabulator.min.css">
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 20px; }
+    h1 { margin: 0 0 10px; }
+    #q { margin: 10px 0; padding: 6px 10px; width: 320px; }
+    #status { margin: 8px 0 16px; color: #b91c1c; }
+    /* If you want to cap the table height with scroll, you can add:
+       #eventos { max-height: 600px; overflow: auto; }
+    */
+  </style>
+</head>
+<body>
+  <h1>Eventos Culturales (XML)</h1>
+  <input id="q" type="text" placeholder="Buscar..." />
+  <div id="status"></div>
+  <div id="eventos"></div>
+
+  <!-- Fast-XML-Parser (UMD) -->
+  <script src="https://cdn.jsdelivr.net/npm/fast-xml-parser@4.4.0/dist/fast-xml-parser.min.js"></script>
+  <!-- Tabulator -->
+  <script src="https://unpkg.com/tabulator-tables@6.2.5/dist/js/tabulator.min.js"></script>
+
+  <script>
+    const URL_XML = 'eventos.xml'; // Debe estar en el mismo directorio
+
+    // Cargar fast-xml-parser de forma robusta (fallback a unpkg si jsDelivr falla)
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = false;
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error('No se pudo cargar ' + src));
+        document.head.appendChild(s);
+      });
+    }
+
+    async function ensureFXP() {
+      if (window.fxp && window.fxp.XMLParser) return; // ya cargado (UMD)
+      // Intentar cargar UMD desde unpkg como respaldo
+      try {
+        await loadScript('https://unpkg.com/fast-xml-parser@4.4.0/dist/fast-xml-parser.min.js');
+      } catch (_) {}
+      if (window.fxp && window.fxp.XMLParser) return;
+      try {
+        const mod = await import('https://esm.run/fast-xml-parser@4.4.0');
+        if (mod && mod.XMLParser) {
+          window.fxp = { XMLParser: mod.XMLParser };
+          return;
+        }
+      } catch (_) {}
+
+      throw new Error('No se pudo cargar fast-xml-parser (fxp) desde los CDNs.\nPrueba desactivar extensiones que bloqueen scripts o descarga el archivo localmente.');
+    }
+
+    function decodeHtml(str = '') {
+      const t = document.createElement('textarea');
+      t.innerHTML = str;
+      return t.value;
+    }
+
+    function getAttr(obj, name) {
+      if (!obj || !obj.attribute) return '';
+      const list = Array.isArray(obj.attribute) ? obj.attribute : [obj.attribute];
+      const found = list.find(a => a && a.name === name);
+      if (!found) return '';
+      // Posibles formas según el XML
+      if (typeof found.string === 'string') return decodeHtml(found.string);
+      if (found.string && typeof found.string._text === 'string') return decodeHtml(found.string._text);
+      if (found.text && typeof found.text._text === 'string') return decodeHtml(found.text._text);
+      if (found.array) {
+        const s = found.array.string;
+        if (Array.isArray(s) && s.length) {
+          const v = typeof s[0] === 'string' ? s[0] : (s[0]?._text || '');
+          return decodeHtml(v);
+        }
+      }
+      return '';
+    }
+
+    function formatDate(s) {
+      if (!s) return '';
+      const m = String(s).match(/^(\d{4})(\d{2})(\d{2})$/);
+      if (m) return `${m[3]}/${m[2]}/${m[1]}`;
+      return s;
+    }
+
+    async function main() {
+      const status = document.getElementById('status');
+      try {
+        // Asegurar que fxp esté disponible (con fallback)
+        await ensureFXP();
+
+        const res = await fetch(URL_XML, { cache: 'no-cache' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const xmlText = await res.text();
+        if (!xmlText.trim()) throw new Error('El archivo XML está vacío');
+
+        const parser = new window.fxp.XMLParser({
+          ignoreAttributes: false,
+          attributeNamePrefix: '',
+          parseAttributeValue: true,
+          parseTagValue: true,
+          trimValues: true,
+          textNodeName: '_text'
+        });
+        const json = parser.parse(xmlText);
+
+        // Estructura: document > list > element[]
+        const elementos = json?.document?.list?.element || [];
+        const items = (Array.isArray(elementos) ? elementos : [elementos])
+          .map(el => {
+            const titulo = getAttr(el, 'Titulo_es');
+            const descripcion = getAttr(el, 'Descripcion_es');
+            const fi = formatDate(getAttr(el, 'FechaInicio'));
+            const ff = formatDate(getAttr(el, 'FechaFin'));
+            const lugar = getAttr(el, 'LugarCelebracionDirectorio_NombreOrganismo') || getAttr(el, 'LugarCelebracion_es');
+            const publico = getAttr(el, 'Destinatarios') || getAttr(el, 'PublicoObjetivo_es');
+            const url = getAttr(el, 'Enlace al contenido');
+            return { TITULO: titulo, DESCRIPCION: descripcion, FECHA_INICIO: fi, FECHA_FIN: ff, LUGAR: lugar, PUBLICO: publico, URL: url };
+          })
+          .filter(r => r.TITULO);
+
+        if (!items.length) {
+          throw new Error('No se encontraron eventos válidos en el XML');
+        }
+
+        const table = new Tabulator('#eventos', {
+          data: items,
+          layout: 'fitDataStretch',
+          pagination: true,
+          paginationSize: 10,
+          columns: [
+            { title: 'Título', field: 'TITULO', sorter: 'string' },
+            { title: 'Descripción', field: 'DESCRIPCION', formatter: 'html' },
+            { title: 'Inicio', field: 'FECHA_INICIO', width: 110 },
+            { title: 'Fin', field: 'FECHA_FIN', width: 110 },
+            { title: 'Lugar', field: 'LUGAR' },
+            { title: 'Público', field: 'PUBLICO', width: 140 },
+            { title: 'Enlace', field: 'URL', width: 110, formatter: (cell) => {
+                const v = cell.getValue();
+                return v ? `<a href="${v}" target="_blank" rel="noopener">Más info</a>` : '';
+              }
+            }
+          ],
+          placeholder: 'Sin resultados que mostrar'
+        });
+
+        // Búsqueda sencilla
+        const q = document.getElementById('q');
+        q.addEventListener('input', () => {
+          const t = q.value.trim().toLowerCase();
+          if (!t) return table.clearFilter(true);
+          // setFilter with a function receives the row data object, not a RowComponent
+          table.setFilter((data) => Object.values(data || {})
+            .some(v => String(v || '').toLowerCase().includes(t)));
+        });
+
+        status.textContent = '';
+      } catch (err) {
+        console.error('Error al cargar/mostrar XML:', err);
+        const status = document.getElementById('status');
+        status.textContent = `❌ Error: ${err?.message || err}`;
+      }
+    }
+
+    // Ejecutar
+    main();
+  </script>
+</body>
+</html>

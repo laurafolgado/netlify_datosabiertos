@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos desde XML</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Eventos Culturales</h1>
+    <table id="eventosTable">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Lugar</th>
+                <th>Público</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Filas se agregarán con JS -->
+        </tbody>
+    </table>
+
+    <script>
+        // Función para limpiar HTML y entidades
+        function decodeHtml(html) {
+            const txt = document.createElement("textarea");
+            txt.innerHTML = html;
+            return txt.value;
+        }
+
+        // Función para extraer el valor de un atributo por su nombre
+        function getAttributeValue(element, attrName) {
+            const attr = Array.from(element.getElementsByTagName('attribute'))
+                .find(attr => attr.getAttribute('name') === attrName);
+            
+            if (!attr) return '';
+            
+            // Buscar el primer elemento hijo que tenga contenido
+            const valueElement = Array.from(attr.children).find(child => 
+                child.textContent && child.textContent.trim() !== ''
+            );
+            
+            // Decodificar entidades HTML (e.g., &aacute; -> á)
+            return valueElement ? decodeHtml(valueElement.textContent.trim()) : '';
+        }
+
+        // Cargar el XML desde el archivo externo
+        fetch('eventos.xml')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data, "text/xml");
+
+                // Obtener todos los elementos 'element' que contienen los eventos
+                const eventos = xmlDoc.getElementsByTagName("element");
+                const tbody = document.getElementById("eventosTable").querySelector("tbody");
+
+                // Iterar sobre cada evento
+                for (let evento of eventos) {
+                    const row = document.createElement("tr");
+
+                    // Extraer datos del XML
+                    const titulo = getAttributeValue(evento, 'Titulo_es');
+                    const descripcion = getAttributeValue(evento, 'Descripcion_es');
+                    const fechaInicio = getAttributeValue(evento, 'FechaInicio');
+                    const fechaFin = getAttributeValue(evento, 'FechaFin');
+                    const lugar = getAttributeValue(evento, 'LugarCelebracionDirectorio_NombreOrganismo') || 
+                                 getAttributeValue(evento, 'LugarCelebracion_es') || 
+                                 'Sin lugar específico';
+                    const publico = getAttributeValue(evento, 'PublicoObjetivo_es') || 'Todos los públicos';
+                    const url = getAttributeValue(evento, 'Enlace al contenido') || '#';
+
+                    // Formatear fechas
+                    const formatDate = (dateStr) => {
+                        if (!dateStr) return 'Sin fecha';
+                        // Asumimos que la fecha está en formato YYYYMMDD
+                        if (dateStr.length >= 8) {
+                            const year = dateStr.substring(0, 4);
+                            const month = dateStr.substring(4, 6);
+                            const day = dateStr.substring(6, 8);
+                            return `${day}/${month}/${year}`;
+                        }
+                        return dateStr;
+                    };
+
+                    // Crear celdas
+                    const cells = [
+                        titulo || 'Sin título',
+                        descripcion || 'Sin descripción',
+                        formatDate(fechaInicio),
+                        formatDate(fechaFin),
+                        lugar,
+                        publico,
+                        url
+                    ];
+
+                    cells.forEach((cellData, index) => {
+                        const cell = document.createElement("td");
+                        if (index === 6) { // Columna URL
+                            const link = document.createElement("a");
+                            link.href = cellData;
+                            link.textContent = cellData === '#' ? 'No disponible' : 'Más info';
+                            link.target = "_blank";
+                            cell.appendChild(link);
+                        } else if (index === 1) { // Columna Descripción
+                            // Decodificar entidades y limpiar etiquetas HTML
+                            let desc = decodeHtml(cellData).replace(/<[^>]*>?/gm, '');
+                            if (desc.length > 150) {
+                                desc = desc.substring(0, 150) + '...';
+                            }
+                            cell.title = desc; // Mostrar tooltip con el texto completo
+                            cell.textContent = desc;
+                        } else {
+                            cell.textContent = cellData;
+                        }
+                        row.appendChild(cell);
+                    });
+
+                    tbody.appendChild(row);
+                }
+            })
+            .catch(error => {
+                console.error("Error al cargar el XML:", error);
+                const tbody = document.getElementById("eventosTable").querySelector("tbody");
+                const row = document.createElement("tr");
+                const cell = document.createElement("td");
+                cell.colSpan = 7;
+                cell.textContent = `Error al cargar los eventos: ${error.message}`;
+                row.appendChild(cell);
+                tbody.appendChild(row);
+            });
+    </script>
+</body>
+</html>
