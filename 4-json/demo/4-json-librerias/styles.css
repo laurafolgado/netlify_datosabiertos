@@ -1,0 +1,115 @@
+:root {
+  --bg: #f7f9fc;
+  --fg: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --header: #f1f5f9;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --row-alt: #fbfdff;
+  --row-hover: #eef6ff;
+}
+
+/* Base */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+  padding: 24px;
+  /* Constrain content width and center it */
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Table */
+#bibliotecasTable {
+  /* Fill container width to avoid horizontal scrolling */
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  /* Cap the table height and allow vertical scrolling */
+  max-height: 600px;
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden; /* prevent horizontal scroll */
+}
+
+#bibliotecasTable thead th {
+  background: var(--header);
+  color: var(--fg);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+#bibliotecasTable tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  /* Better wrapping for long words/URLs */
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+#bibliotecasTable tbody tr:nth-child(odd) {
+  background: var(--row-alt);
+}
+
+#bibliotecasTable tbody tr:hover {
+  background: var(--row-hover);
+}
+
+/* Make the description column nicer */
+#bibliotecasTable tbody td:nth-child(2) {
+  color: var(--muted);
+  max-width: 480px;
+  word-break: break-word;
+}
+
+/* Dates */
+#bibliotecasTable tbody td:nth-child(3),
+#bibliotecasTable tbody td:nth-child(4) {
+  white-space: nowrap;
+}
+
+/* Links */
+#bibliotecasTable a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+#bibliotecasTable a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* Small screens */
+@media (max-width: 760px) {
+  body { padding: 16px; }
+  h1 { font-size: 22px; }
+  /* Narrow description on small screens */
+  #bibliotecasTable tbody td:nth-child(2) {
+    max-width: 320px;
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bibliotecas de Castilla y León</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Bibliotecas de Castilla y León</h1>
+    <table id="bibliotecasTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Localidad</th>
+                <th>Horario de Apertura</th>
+                <th>Enlace</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Filas se agregarán con JS -->
+        </tbody>
+    </table>
+
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        // Función para decodificar entidades HTML
+        function decodeHtml(html) {
+            if (!html) return "";
+            const txt = document.createElement("textarea");
+            txt.innerHTML = html;
+            return txt.value;
+        }
+
+        // Cargar JSON con Axios
+        axios.get('registro-de-instituciones-bibliotecarias-de-castilla-y-leon.json')
+            .then(response => {
+                const data = response.data;
+                const tableBody = document.querySelector('#bibliotecasTable tbody');
+                data.forEach(biblioteca => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${decodeHtml(biblioteca.nombreentidad || '')}</td>
+                        <td>${decodeHtml(biblioteca.localidad || '')}</td>
+                        <td>${decodeHtml(biblioteca.horario_de_apertura || '')}</td>
+                        <td><a href="${biblioteca.enlace_al_contenido || '#'}" target="_blank">Más info</a></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error("Error al cargar o parsear el JSON:", error);
+                const tableBody = document.querySelector('#bibliotecasTable tbody');
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="6">Error: ${error.message}</td>`;
+                tableBody.appendChild(row);
+            });
+    </script>
+</body>
+</html>

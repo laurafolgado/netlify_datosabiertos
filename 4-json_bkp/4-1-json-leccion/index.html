@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../4-3-json-ejemplo-libreria/">
+        <link rel="prev" href="../../3-xml/3-4-xml-demo/">
       
       
-        <link rel="next" href="../../5-api/5-1-api-leccion/">
+        <link rel="next" href="../4-2-json-ejemplo-vanilla/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>4.4 Demo: Instituciones bibliotecarias (JSON) - Uso de Datos Abiertos de la Junta de Castilla y León en Desarrollo Web</title>
+        <title>4.1 Lección - Uso de Datos Abiertos de la Junta de Castilla y León en Desarrollo Web</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#44-demo-instituciones-bibliotecarias-jsons" class="md-skip">
+        <a href="#41-consumo-de-datos-en-formato-json-datos-abiertos-jcyl" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4.4 Demo: Instituciones bibliotecarias (JSON)
+              4.1 Lección
             
           </span>
         </div>
@@ -871,10 +871,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../4-1-json-leccion/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    4.1 Lección
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -885,6 +907,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-un-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 ¿Qué es un JSON?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-se-utiliza-tanto-en-datos-abiertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 ¿Por qué se utiliza tanto en datos abiertos?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#particularidades-de-los-json-en-el-portal-de-cyl" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Particularidades de los JSON en el portal de CyL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventajas-de-usar-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Ventajas de usar JSON
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitaciones-y-retos" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Limitaciones y retos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preguntas-de-repaso" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Preguntas de repaso
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -940,32 +1036,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    4.4 Demo: Instituciones bibliotecarias (JSON)
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../4-4-json-demo/" class="md-nav__link">
         
   
   
@@ -976,77 +1050,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#que-encontraras-en-las-demos" class="md-nav__link">
-    <span class="md-ellipsis">
-      📌 Qué encontrarás en las demos
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#acceso-a-las-demos" class="md-nav__link">
-    <span class="md-ellipsis">
-      📌 Acceso a las demos
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📌 Acceso a las demos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#demo-con-javascript-puro-vanilla" class="md-nav__link">
-    <span class="md-ellipsis">
-      ▶️ Demo con JavaScript puro (vanilla)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#demo-con-libreria-axios" class="md-nav__link">
-    <span class="md-ellipsis">
-      ▶️ Demo con librería (Axios)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#preguntas-de-reflexion" class="md-nav__link">
-    <span class="md-ellipsis">
-      📝 Preguntas de reflexión
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1702,51 +1705,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#que-encontraras-en-las-demos" class="md-nav__link">
+  <a href="#que-es-un-json" class="md-nav__link">
     <span class="md-ellipsis">
-      📌 Qué encontrarás en las demos
+      📌 ¿Qué es un JSON?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#acceso-a-las-demos" class="md-nav__link">
+  <a href="#por-que-se-utiliza-tanto-en-datos-abiertos" class="md-nav__link">
     <span class="md-ellipsis">
-      📌 Acceso a las demos
+      📌 ¿Por qué se utiliza tanto en datos abiertos?
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="📌 Acceso a las demos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#demo-con-javascript-puro-vanilla" class="md-nav__link">
-    <span class="md-ellipsis">
-      ▶️ Demo con JavaScript puro (vanilla)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#demo-con-libreria-axios" class="md-nav__link">
-    <span class="md-ellipsis">
-      ▶️ Demo con librería (Axios)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#preguntas-de-reflexion" class="md-nav__link">
+  <a href="#particularidades-de-los-json-en-el-portal-de-cyl" class="md-nav__link">
     <span class="md-ellipsis">
-      📝 Preguntas de reflexión
+      📌 Particularidades de los JSON en el portal de CyL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventajas-de-usar-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Ventajas de usar JSON
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitaciones-y-retos" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Limitaciones y retos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preguntas-de-repaso" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Preguntas de repaso
     </span>
   </a>
   
@@ -1768,50 +1774,96 @@
 
 
 
-<h1 id="44-demo-instituciones-bibliotecarias-jsons">4.4. Demo: Instituciones bibliotecarias (JSON)s</h1>
-<p>Ya hemos visto cómo procesar un JSON con <strong>JavaScript puro</strong> y cómo simplificar la tarea usando una <strong>librería externa</strong> como <code>Axios</code>.<br />
-Es momento de ver el resultado final funcionando en páginas reales.</p>
-<p>En estas demos utilizamos el dataset de <strong>instituciones bibliotecarias de Castilla y León</strong> (<code>registro-instituciones-bibliotecarias-de-castilla-y-leon.json</code>).<br />
-El sistema carga el archivo JSON, obtiene la lista de instituciones y las muestra en una <strong>tabla accesible</strong> con columnas clave como nombre, municipio y provincia.</p>
+<h1 id="41-consumo-de-datos-en-formato-json-datos-abiertos-jcyl">4.1. Consumo de datos en formato JSON (Datos Abiertos JCyL)</h1>
+<p>Además de CSV y XML, muchos conjuntos del portal de <strong>Datos Abiertos de la Junta de Castilla y León</strong> se publican en <strong>JSON</strong> (<em>JavaScript Object Notation</em>).<br />
+Este formato se ha convertido en el <strong>estándar actual en aplicaciones web</strong>, ya que está pensado para representar datos estructurados de forma sencilla y es totalmente compatible con JavaScript.</p>
+<p>En esta lección veremos <strong>qué es un JSON</strong>, cuáles son sus <strong>características</strong>, qué <strong>ventajas</strong> ofrece y también sus <strong>limitaciones</strong>.<br />
+Después, en los siguientes apartados, aprenderemos a procesarlo con <strong>JavaScript puro</strong> y con <strong>librerías externas</strong> como Axios.</p>
 <hr />
-<h2 id="que-encontraras-en-las-demos">📌 Qué encontrarás en las demos</h2>
+<h2 id="que-es-un-json">📌 ¿Qué es un JSON?</h2>
+<p>JSON es un formato basado en texto que representa datos como <strong>objetos y arrays</strong> de JavaScript.<br />
+Se compone de pares <code>clave: valor</code>, organizados con llaves <code>{}</code> y corchetes <code>[]</code>.</p>
+<p>Ejemplo simplificado (basado en un dataset de instituciones bibliotecarias):</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;institucion&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Biblioteca Pública de Burgos&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;provincia&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Burgos&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;servicios&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Préstamo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Sala de lectura&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Acceso a Internet&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>En este ejemplo:</p>
 <ul>
-<li><strong>Carga real del dataset</strong> <code>registro-instituciones-bibliotecarias-de-castilla-y-leon.json</code>.  </li>
-<li>Dos enfoques:</li>
-<li><strong>Vanilla (<code>fetch</code> + <code>.json()</code>)</strong>: carga y procesa el JSON sin dependencias externas.  </li>
-<li><strong>Librería (<code>Axios</code>)</strong>: añade simplificación en el manejo de errores, cabeceras y timeouts.  </li>
-<li>Renderizado de una <strong>tabla HTML accesible</strong> con los datos principales.  </li>
-<li>Gestión de <strong>errores de red</strong> y mensajes en consola o pantalla para depuración.</li>
+<li><code>institucion</code> es un <strong>objeto</strong> con tres claves.</li>
+<li><code>nombre</code> y <code>provincia</code> son <strong>cadenas de texto</strong>.</li>
+<li><code>servicios</code> es un <strong>array</strong> de valores.</li>
+</ul>
+<hr />
+<h2 id="por-que-se-utiliza-tanto-en-datos-abiertos">📌 ¿Por qué se utiliza tanto en datos abiertos?</h2>
+<p>JSON se ha popularizado en los portales de datos y en APIs por varias razones:</p>
+<ol>
+<li><strong>Compatibilidad nativa con JavaScript</strong>: no necesita transformaciones para usarlo en el navegador.</li>
+<li><strong>Estructura clara</strong>: permite representar tanto listas simples como datos jerárquicos.</li>
+<li><strong>Ligereza</strong>: ocupa menos que XML, sin etiquetas repetitivas.</li>
+<li><strong>Legibilidad</strong>: es texto plano y se entiende fácilmente a simple vista.</li>
+<li><strong>Interoperabilidad</strong>: casi todos los lenguajes modernos incluyen soporte para JSON.</li>
+</ol>
+<p>En los <strong>datos abiertos de Castilla y León</strong> encontrarás JSON en conjuntos como el <strong>registro de instituciones bibliotecarias</strong> o los <strong>monumentos</strong>.</p>
+<hr />
+<h2 id="particularidades-de-los-json-en-el-portal-de-cyl">📌 Particularidades de los JSON en el portal de CyL</h2>
+<p>Al trabajar con JSON del portal, conviene fijarse en:</p>
+<ul>
+<li><strong>Objeto raíz</strong>: a veces todo el dataset está dentro de un único objeto, otras veces es un array.</li>
+<li><strong>Listas anidadas</strong>: por ejemplo, un monumento puede incluir varias direcciones o servicios.</li>
+<li><strong>Valores nulos o vacíos</strong>: algunas claves pueden no tener información (<code>null</code> o <code>""</code>).</li>
+<li><strong>Codificación</strong>: los archivos suelen estar en <strong>UTF-8</strong>, lo que garantiza la compatibilidad con acentos y ñ.</li>
+<li><strong>Consistencia de claves</strong>: conviene comprobar si todas las entradas tienen las mismas claves (no siempre es así).</li>
+</ul>
+<p>Ejemplo real simplificado del dataset de monumentos:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;monumentos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muralla de Ávila&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;provincia&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ávila&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;municipio&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ávila&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Catedral de Burgos&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;provincia&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Burgos&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;municipio&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Burgos&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="ventajas-de-usar-json">📌 Ventajas de usar JSON</h2>
+<ul>
+<li><strong>Nativo en JavaScript</strong>: se convierte fácilmente con <code>JSON.parse()</code>.</li>
+<li><strong>Estructuras jerárquicas</strong>: admite arrays dentro de objetos y viceversa.</li>
+<li><strong>Más ligero que XML</strong>: ocupa menos espacio en la red.</li>
+<li><strong>Formato abierto y estándar</strong>: soportado en casi todos los lenguajes.</li>
+<li><strong>Lectura sencilla</strong>: fácil de inspeccionar para humanos.</li>
+</ul>
+<hr />
+<h2 id="limitaciones-y-retos">📌 Limitaciones y retos</h2>
+<ul>
+<li><strong>Menos adecuado para documentos muy extensos</strong>: XML puede ser más claro en datos con mucho texto y metadatos.</li>
+<li><strong>No incluye comentarios</strong>: no se puede documentar dentro del propio JSON.</li>
+<li><strong>Estructura rígida</strong>: si faltan o cambian claves, el código puede fallar.</li>
+<li><strong>Tamaño</strong>: aunque más ligero que XML, puede crecer mucho con datasets masivos.</li>
+<li><strong>Validación externa</strong>: no tiene un esquema obligatorio (aunque existen estándares como JSON Schema).</li>
 </ul>
 <hr />
 <div class="admonition tip">
 <p class="admonition-title">Consejo</p>
-<p>Recuerda abrir el proyecto con un <strong>servidor local</strong> (por ejemplo, la extensión <em>Live Server</em> en VS Code, o <code>mkdocs serve</code>).<br />
-Si intentas abrirlo directamente con <code>file://</code>, el navegador puede bloquear la carga del JSON por motivos de seguridad.</p>
+<p>Antes de trabajar con un JSON:
+- Abre el archivo en un editor para confirmar si el <strong>raíz</strong> es un objeto o un array.<br />
+- Verifica que todas las entradas tienen las <strong>claves importantes</strong> (ej. <code>nombre</code>, <code>provincia</code>).<br />
+- Comprueba si aparecen valores vacíos o <code>null</code> y decide cómo tratarlos.<br />
+- Si es muy grande, <strong>filtra</strong> antes de mostrar todo en la web.  </p>
 </div>
 <hr />
-<h2 id="acceso-a-las-demos">📌 Acceso a las demos</h2>
-<h3 id="demo-con-javascript-puro-vanilla">▶️ Demo con JavaScript puro (vanilla)</h3>
-<p><a href="../demo/4-json-js/"><strong>Abrir demo en vivo (vanilla)</strong></a>{ target=_blank }</p>
-<p>También puedes verla incrustada aquí:</p>
-<iframe src="./demo/4-json-js/index.html" width="100%" height="640" loading="lazy"></iframe>
-
-<hr />
-<h3 id="demo-con-libreria-axios">▶️ Demo con librería (<code>Axios</code>)</h3>
-<p><a href="../demo/4-json-librerias/"><strong>Abrir demo en vivo (Axios)</strong></a>{ target=_blank }</p>
-<p>También puedes verla incrustada aquí:</p>
-<iframe src="./demo/4-json-librerias/index.html" width="100%" height="640" loading="lazy"></iframe>
-
-<hr />
-<h2 id="preguntas-de-reflexion">📝 Preguntas de reflexión</h2>
+<h2 id="preguntas-de-repaso">📝 Preguntas de repaso</h2>
 <div class="admonition question">
 <p class="admonition-title">Repaso</p>
 <ol>
-<li>¿Qué diferencia clave hay entre el enfoque <strong>vanilla</strong> (fetch) y el de <strong>librería</strong> (Axios)?  </li>
-<li>¿Qué ventajas aporta Axios en cuanto a manejo de errores y timeouts?  </li>
-<li>¿Qué pasos realiza el código antes de renderizar la tabla en pantalla?  </li>
-<li>¿Cómo manejarías un JSON cuya estructura cambiara (por ejemplo, si la lista no estuviera bajo <code>instituciones</code>)?  </li>
-<li>¿Qué mejoras añadirías a la demo para facilitar la exploración de los datos (ej. filtros, paginación, búsqueda)?</li>
+<li>¿Qué diferencia principal hay entre un JSON y un XML?</li>
+<li>¿Qué ventajas tiene JSON frente a CSV?</li>
+<li>¿Qué problemas puedes encontrar si un JSON no tiene siempre las mismas claves en todos sus objetos?</li>
+<li>¿Por qué es útil que JSON sea el formato nativo de JavaScript?</li>
+<li>¿Qué pasos previos harías antes de procesar un JSON en tu aplicación web?</li>
 </ol>
 </div>
 

@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../4-3-json-ejemplo-libreria/">
+        <link rel="prev" href="../4-2-json-ejemplo-vanilla/">
       
       
-        <link rel="next" href="../../5-api/5-1-api-leccion/">
+        <link rel="next" href="../4-4-json-demo/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>4.4 Demo: Instituciones bibliotecarias (JSON) - Uso de Datos Abiertos de la Junta de Castilla y León en Desarrollo Web</title>
+        <title>4.3 Ej. Librería Axios - Uso de Datos Abiertos de la Junta de Castilla y León en Desarrollo Web</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#44-demo-instituciones-bibliotecarias-jsons" class="md-skip">
+        <a href="#43-ejemplo-con-libreria-axios" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4.4 Demo: Instituciones bibliotecarias (JSON)
+              4.3 Ej. Librería Axios
             
           </span>
         </div>
@@ -917,29 +917,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../4-3-json-ejemplo-libreria/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    4.3 Ej. Librería Axios
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -957,7 +934,7 @@
   
   
   <span class="md-ellipsis">
-    4.4 Demo: Instituciones bibliotecarias (JSON)
+    4.3 Ej. Librería Axios
     
   </span>
   
@@ -970,7 +947,7 @@
   
   
   <span class="md-ellipsis">
-    4.4 Demo: Instituciones bibliotecarias (JSON)
+    4.3 Ej. Librería Axios
     
   </span>
   
@@ -993,37 +970,82 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#que-encontraras-en-las-demos" class="md-nav__link">
+  <a href="#como-incluir-la-libreria" class="md-nav__link">
     <span class="md-ellipsis">
-      📌 Qué encontrarás en las demos
+      📦 Cómo incluir la librería
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#acceso-a-las-demos" class="md-nav__link">
+  <a href="#flujo-de-trabajo-con-libreria" class="md-nav__link">
     <span class="md-ellipsis">
-      📌 Acceso a las demos
+      📌 Flujo de trabajo con librería
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📌 Acceso a las demos">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo-paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧩 Código paso a paso
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧩 Código paso a paso">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#demo-con-javascript-puro-vanilla" class="md-nav__link">
+  <a href="#1-cargar-el-json-con-axios" class="md-nav__link">
     <span class="md-ellipsis">
-      ▶️ Demo con JavaScript puro (vanilla)
+      1) Cargar el JSON con Axios
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#demo-con-libreria-axios" class="md-nav__link">
+  <a href="#2-detectar-la-forma-del-dataset-y-quedarnos-con-la-lista" class="md-nav__link">
     <span class="md-ellipsis">
-      ▶️ Demo con librería (Axios)
+      2) Detectar la forma del dataset y quedarnos con la lista
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mapear-a-un-modelo-de-columnas-util" class="md-nav__link">
+    <span class="md-ellipsis">
+      3) Mapear a un modelo de columnas útil
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-renderizar-una-tabla-html-sencilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      4) Renderizar una tabla HTML sencilla
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-ponerlo-todo-junto" class="md-nav__link">
+    <span class="md-ellipsis">
+      5) Ponerlo todo junto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opcional-cancelar-una-peticion-con-abortcontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      (Opcional) Cancelar una petición con AbortController
     </span>
   </a>
   
@@ -1035,9 +1057,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#preguntas-de-reflexion" class="md-nav__link">
+  <a href="#comparacion-con-el-enfoque-vanilla" class="md-nav__link">
     <span class="md-ellipsis">
-      📝 Preguntas de reflexión
+      ⚖️ Comparación con el enfoque vanilla
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preguntas-de-repaso" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Preguntas de repaso
     </span>
   </a>
   
@@ -1047,6 +1078,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-4-json-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.4 Demo: Instituciones bibliotecarias (JSON)
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1702,37 +1756,82 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#que-encontraras-en-las-demos" class="md-nav__link">
+  <a href="#como-incluir-la-libreria" class="md-nav__link">
     <span class="md-ellipsis">
-      📌 Qué encontrarás en las demos
+      📦 Cómo incluir la librería
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#acceso-a-las-demos" class="md-nav__link">
+  <a href="#flujo-de-trabajo-con-libreria" class="md-nav__link">
     <span class="md-ellipsis">
-      📌 Acceso a las demos
+      📌 Flujo de trabajo con librería
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📌 Acceso a las demos">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo-paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧩 Código paso a paso
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧩 Código paso a paso">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#demo-con-javascript-puro-vanilla" class="md-nav__link">
+  <a href="#1-cargar-el-json-con-axios" class="md-nav__link">
     <span class="md-ellipsis">
-      ▶️ Demo con JavaScript puro (vanilla)
+      1) Cargar el JSON con Axios
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#demo-con-libreria-axios" class="md-nav__link">
+  <a href="#2-detectar-la-forma-del-dataset-y-quedarnos-con-la-lista" class="md-nav__link">
     <span class="md-ellipsis">
-      ▶️ Demo con librería (Axios)
+      2) Detectar la forma del dataset y quedarnos con la lista
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mapear-a-un-modelo-de-columnas-util" class="md-nav__link">
+    <span class="md-ellipsis">
+      3) Mapear a un modelo de columnas útil
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-renderizar-una-tabla-html-sencilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      4) Renderizar una tabla HTML sencilla
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-ponerlo-todo-junto" class="md-nav__link">
+    <span class="md-ellipsis">
+      5) Ponerlo todo junto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opcional-cancelar-una-peticion-con-abortcontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      (Opcional) Cancelar una petición con AbortController
     </span>
   </a>
   
@@ -1744,9 +1843,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#preguntas-de-reflexion" class="md-nav__link">
+  <a href="#comparacion-con-el-enfoque-vanilla" class="md-nav__link">
     <span class="md-ellipsis">
-      📝 Preguntas de reflexión
+      ⚖️ Comparación con el enfoque vanilla
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preguntas-de-repaso" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Preguntas de repaso
     </span>
   </a>
   
@@ -1768,50 +1876,201 @@
 
 
 
-<h1 id="44-demo-instituciones-bibliotecarias-jsons">4.4. Demo: Instituciones bibliotecarias (JSON)s</h1>
-<p>Ya hemos visto cómo procesar un JSON con <strong>JavaScript puro</strong> y cómo simplificar la tarea usando una <strong>librería externa</strong> como <code>Axios</code>.<br />
-Es momento de ver el resultado final funcionando en páginas reales.</p>
-<p>En estas demos utilizamos el dataset de <strong>instituciones bibliotecarias de Castilla y León</strong> (<code>registro-instituciones-bibliotecarias-de-castilla-y-leon.json</code>).<br />
-El sistema carga el archivo JSON, obtiene la lista de instituciones y las muestra en una <strong>tabla accesible</strong> con columnas clave como nombre, municipio y provincia.</p>
+<h1 id="43-ejemplo-con-libreria-axios">4.3. Ejemplo con librería (Axios)</h1>
+<p>En este apartado vamos a ver cómo procesar un JSON utilizando una <strong>librería externa</strong>, en concreto <strong>Axios</strong>, para simplificar la carga y el manejo de errores.<br />
+Trabajaremos con el dataset de <strong>instituciones bibliotecarias de Castilla y León</strong> en formato JSON.</p>
 <hr />
-<h2 id="que-encontraras-en-las-demos">📌 Qué encontrarás en las demos</h2>
-<ul>
-<li><strong>Carga real del dataset</strong> <code>registro-instituciones-bibliotecarias-de-castilla-y-leon.json</code>.  </li>
-<li>Dos enfoques:</li>
-<li><strong>Vanilla (<code>fetch</code> + <code>.json()</code>)</strong>: carga y procesa el JSON sin dependencias externas.  </li>
-<li><strong>Librería (<code>Axios</code>)</strong>: añade simplificación en el manejo de errores, cabeceras y timeouts.  </li>
-<li>Renderizado de una <strong>tabla HTML accesible</strong> con los datos principales.  </li>
-<li>Gestión de <strong>errores de red</strong> y mensajes en consola o pantalla para depuración.</li>
-</ul>
+<h2 id="como-incluir-la-libreria">📦 Cómo incluir la librería</h2>
+<p>En este curso usaremos <strong>CDN</strong> (no hace falta <code>npm</code>). Inserta el script en tu HTML antes de tu código:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;module&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;main.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+<blockquote>
+<p>Si más adelante empaquetas con Vite/Webpack, podrás <code>import axios from "axios"</code> sin cambiar el resto del código.</p>
+</blockquote>
+<hr />
+<h2 id="flujo-de-trabajo-con-libreria">📌 Flujo de trabajo con librería</h2>
+<ol>
+<li><strong>Incluir Axios</strong> desde CDN.</li>
+<li><strong>Hacer la solicitud</strong> con <code>axios.get(url)</code>.</li>
+<li><strong>Recibir los datos</strong> desde <code>response.data</code> (ya parseados).</li>
+<li><strong>Comprobar la estructura</strong> (array u objeto).</li>
+<li><strong>Mapear</strong> a un modelo de columnas útil para la interfaz.</li>
+<li><strong>Renderizar</strong> la información en una tabla simple.</li>
+<li><strong>Gestionar errores</strong> (red, timeout) y, si hace falta, <strong>cancelar</strong> la petición.</li>
+</ol>
+<hr />
+<h2 id="codigo-paso-a-paso">🧩 Código paso a paso</h2>
+<h3 id="1-cargar-el-json-con-axios">1) Cargar el JSON con Axios</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// datasets/json/registro-de-instituciones-bibliotecarias-de-castilla-y-leon.json</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">URL_JSON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;datasets/json/registro-de-instituciones-bibliotecarias-de-castilla-y-leon.json&quot;</span><span class="p">;</span>
+
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">cargarJSON</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">URL_JSON</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Accept</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="mf">8000</span><span class="w"> </span><span class="c1">// ms</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Manejo de errores típico con Axios</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">axios</span><span class="p">.</span><span class="nx">isAxiosError</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Axios error:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;status:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">response</span><span class="o">?</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Error desconocido:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="nx">err</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="2-detectar-la-forma-del-dataset-y-quedarnos-con-la-lista">2) Detectar la forma del dataset y quedarnos con la lista</h3>
+<p>El fichero real de bibliotecas es un <strong>array de objetos</strong>. Por eso comprobamos si <code>data</code> ya es un array; si no, intentamos localizar la clave lista (por ejemplo, <code>instituciones</code> en otros JSON).</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">obtenerListaInstituciones</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// fallback genérico si viniera envuelto en un objeto</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span><span class="o">?</span><span class="p">.</span><span class="nx">instituciones</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">[];</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="3-mapear-a-un-modelo-de-columnas-util">3) Mapear a un modelo de columnas útil</h3>
+<p>Seleccionamos las claves que queramos mostrar en la tabla (tú puedes cambiar/añadir):</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">aFilasTabla</span><span class="p">(</span><span class="nx">instituciones</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">instituciones</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">    </span><span class="nx">nombreentidad</span><span class="o">:</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">nombreentidad</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">localidad</span><span class="o">:</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">localidad</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tipo_de_gestion</span><span class="o">:</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">tipo_de_gestion</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">codigo</span><span class="o">:</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">codigo</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">enlace_al_contenido</span><span class="o">:</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">enlace_al_contenido</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="p">}));</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="4-renderizar-una-tabla-html-sencilla">4) Renderizar una tabla HTML sencilla</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">renderTabla</span><span class="p">(</span><span class="nx">datos</span><span class="p">,</span><span class="w"> </span><span class="nx">columnas</span><span class="p">,</span><span class="w"> </span><span class="nx">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">tabla</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// cabecera</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">thead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;thead&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">trH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">columnas</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">col</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">th</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;th&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">th</span><span class="p">.</span><span class="nx">scope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;col&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">th</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">col</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">trH</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">th</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="nx">thead</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">trH</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">tabla</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">thead</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// filas</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">tbody</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;tbody&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">datos</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">fila</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">tr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">columnas</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">col</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">td</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">td</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fila</span><span class="p">[</span><span class="nx">col</span><span class="p">]</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">td</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="nx">tbody</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tr</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="nx">tabla</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tbody</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">destino</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tabla</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="5-ponerlo-todo-junto">5) Ponerlo todo junto</h3>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">cargarJSON</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">instituciones</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obtenerListaInstituciones</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">filas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">aFilasTabla</span><span class="p">(</span><span class="nx">instituciones</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">renderTabla</span><span class="p">(</span><span class="nx">filas</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;nombreentidad&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;localidad&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;tipo_de_gestion&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;codigo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;enlace_al_contenido&quot;</span><span class="p">]);</span>
+<span class="p">})();</span>
+</code></pre></div>
+<hr />
+<h3 id="opcional-cancelar-una-peticion-con-abortcontroller">(Opcional) Cancelar una petición con <code>AbortController</code></h3>
+<p>Axios 1.x soporta <strong>AbortController</strong> (útil si el usuario cambia de vista):</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AbortController</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">peticion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">URL_JSON</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="o">:</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span><span class="w"> </span><span class="p">});</span>
+
+<span class="c1">// … si necesitas abortar:</span>
+<span class="nx">controller</span><span class="p">.</span><span class="nx">abort</span><span class="p">();</span>
+</code></pre></div>
 <hr />
 <div class="admonition tip">
 <p class="admonition-title">Consejo</p>
-<p>Recuerda abrir el proyecto con un <strong>servidor local</strong> (por ejemplo, la extensión <em>Live Server</em> en VS Code, o <code>mkdocs serve</code>).<br />
-Si intentas abrirlo directamente con <code>file://</code>, el navegador puede bloquear la carga del JSON por motivos de seguridad.</p>
+<p>En <strong>MkDocs</strong> (o cualquier servidor estático), usa siempre un <strong>servidor local</strong> (<code>mkdocs serve</code>, Live Server…).
+Si abres el HTML con <code>file://</code>, el navegador puede bloquear la lectura del JSON.
+Revisa en DevTools → Network que la <strong>ruta relativa</strong> a <code>datasets/json/...</code> es la correcta.</p>
 </div>
 <hr />
-<h2 id="acceso-a-las-demos">📌 Acceso a las demos</h2>
-<h3 id="demo-con-javascript-puro-vanilla">▶️ Demo con JavaScript puro (vanilla)</h3>
-<p><a href="../demo/4-json-js/"><strong>Abrir demo en vivo (vanilla)</strong></a>{ target=_blank }</p>
-<p>También puedes verla incrustada aquí:</p>
-<iframe src="./demo/4-json-js/index.html" width="100%" height="640" loading="lazy"></iframe>
-
+<h2 id="comparacion-con-el-enfoque-vanilla">⚖️ Comparación con el enfoque <em>vanilla</em></h2>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Vanilla (<code>fetch</code> + <code>.json()</code>)</th>
+<th>Con librería (Axios)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parseo</td>
+<td>Manual (<code>res.json()</code>)</td>
+<td>Automático en <code>response.data</code></td>
+</tr>
+<tr>
+<td>Errores</td>
+<td><code>try/catch</code> + comprobar <code>res.ok</code></td>
+<td><code>try/catch</code> + <code>axios.isAxiosError</code>, códigos de estado accesibles</td>
+</tr>
+<tr>
+<td>Timeouts</td>
+<td>Hay que implementar señal/abort manual</td>
+<td>Opción <code>timeout</code> nativa</td>
+</tr>
+<tr>
+<td>Cancelación</td>
+<td><code>AbortController</code> con <code>fetch</code></td>
+<td><code>AbortController</code> soportado (<code>{ signal }</code>)</td>
+</tr>
+<tr>
+<td>Cabeceras por defecto</td>
+<td>Debes pasarlas tú (opcional)</td>
+<td>Incluye cabeceras sensatas; fácil añadir <code>headers</code></td>
+</tr>
+<tr>
+<td>Interceptores / logging</td>
+<td>A mano en cada llamada</td>
+<td>Interceptores globales (<code>axios.interceptors</code>)</td>
+</tr>
+<tr>
+<td>Tamaño de código repetitivo</td>
+<td>Algo más de “pegamento” por cada endpoint</td>
+<td>Menos repetición; configuración común y <em>defaults</em></td>
+</tr>
+<tr>
+<td>Dependencias</td>
+<td>Ninguna</td>
+<td>1 dependencia (ligera)</td>
+</tr>
+<tr>
+<td>Curva de aprendizaje</td>
+<td>Muy baja</td>
+<td>Muy baja (si sabes <code>fetch</code>, te resultará familiar)</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h3 id="demo-con-libreria-axios">▶️ Demo con librería (<code>Axios</code>)</h3>
-<p><a href="../demo/4-json-librerias/"><strong>Abrir demo en vivo (Axios)</strong></a>{ target=_blank }</p>
-<p>También puedes verla incrustada aquí:</p>
-<iframe src="./demo/4-json-librerias/index.html" width="100%" height="640" loading="lazy"></iframe>
-
-<hr />
-<h2 id="preguntas-de-reflexion">📝 Preguntas de reflexión</h2>
+<h2 id="preguntas-de-repaso">📝 Preguntas de repaso</h2>
 <div class="admonition question">
 <p class="admonition-title">Repaso</p>
 <ol>
-<li>¿Qué diferencia clave hay entre el enfoque <strong>vanilla</strong> (fetch) y el de <strong>librería</strong> (Axios)?  </li>
-<li>¿Qué ventajas aporta Axios en cuanto a manejo de errores y timeouts?  </li>
-<li>¿Qué pasos realiza el código antes de renderizar la tabla en pantalla?  </li>
-<li>¿Cómo manejarías un JSON cuya estructura cambiara (por ejemplo, si la lista no estuviera bajo <code>instituciones</code>)?  </li>
-<li>¿Qué mejoras añadirías a la demo para facilitar la exploración de los datos (ej. filtros, paginación, búsqueda)?</li>
+<li>¿Qué diferencia hay entre <code>response.json()</code> en <em>vanilla</em> y <code>response.data</code> en Axios?</li>
+<li>¿Cómo comprobarías si el dataset viene como <strong>array</strong> o dentro de una <strong>clave</strong> (ej. <code>instituciones</code>)?</li>
+<li>¿Qué ventajas aporta <code>timeout</code> en Axios frente a <em>fetch</em> puro?</li>
+<li>¿Cómo cancelarías una petición en curso con Axios?</li>
+<li>¿Qué columnas has decidido mostrar y por qué?</li>
 </ol>
 </div>
 
